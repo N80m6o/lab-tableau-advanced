@@ -20,7 +20,7 @@
     <WindowsPersistSimpleIdentifiers />
     <WorksheetBackgroundTransparency />
   </document-format-change-manifest>
-  <repository-location id='MarketingCustomersDemoIncome' path='/workbooks' revision='1.2' />
+  <repository-location id='MarketingCustomerDemographics' path='/workbooks' revision='2.0' />
   <preferences>
     <preference name='ui.encoding.shelf.height' value='24' />
     <preference name='ui.shelf.height' value='26' />
@@ -943,14 +943,6 @@
         <param name='target' value='DsB_Customer_Demo_Incom_And_Service' />
       </command>
     </action>
-    <action caption='Filtro 1 (gerado)' name='[Action6_B81F231EAE6443E6ABA878ABEC25107D]'>
-      <activation auto-clear='true' type='on-select' />
-      <source dashboard='DsB_Customer_Demo_Incom_And_Service' type='sheet' worksheet='Boxplot_Vehicle_Claims' />
-      <command command='tsc:tsl-filter'>
-        <param name='special-fields' value='all' />
-        <param name='target' value='DsB_Customer_Demo_Incom_And_Service' />
-      </command>
-    </action>
     <action caption='Filtro 3 (gerado) 1' name='[Action8_649EB86B0E2E493996846938C4412B20]'>
       <activation auto-clear='true' type='on-select' />
       <source dashboard='DsB_Customer_Demo_Incom_And_Service' type='sheet' worksheet='Employment Status per Gender' />
@@ -973,7 +965,7 @@
       <layout-options>
         <title>
           <formatted-text>
-            <run bold='true' fontname='Calibri' fontsize='10'>Claims per Vehicle Size</run>
+            <run bold='true' fontname='Calibri' fontsize='10'>Claims Amount per Vehicle Size</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -983,18 +975,11 @@
             <datasource caption='we_fn_use_c_marketing_customer_value_analysis' name='federated.1tdv5180uli2ye1atqdsy1d357mk' />
           </datasources>
           <datasource-dependencies datasource='federated.1tdv5180uli2ye1atqdsy1d357mk'>
-            <column datatype='string' name='[State]' role='dimension' semantic-role='[State].[Name]' type='nominal' />
             <column datatype='real' name='[Total Claim Amount]' role='measure' type='quantitative' />
             <column datatype='string' name='[Vehicle Size]' role='dimension' type='nominal' />
             <column-instance column='[Total Claim Amount]' derivation='None' name='[none:Total Claim Amount:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Vehicle Size]' derivation='None' name='[none:Vehicle Size:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.1tdv5180uli2ye1atqdsy1d357mk].[Action (State)]'>
-            <groupfilter function='level-members' level='[State]' user:ui-action-filter='[Action10_025B02A30D8A4316BE386F25A7954CFC]' user:ui-enumeration='all' user:ui-marker='enumerate' />
-          </filter>
-          <slices>
-            <column>[federated.1tdv5180uli2ye1atqdsy1d357mk].[Action (State)]</column>
-          </slices>
           <aggregation value='true' />
         </view>
         <style>
@@ -1083,7 +1068,7 @@
             </groupfilter>
           </filter>
           <filter class='categorical' column='[federated.1tdv5180uli2ye1atqdsy1d357mk].[Action (State)]'>
-            <groupfilter function='level-members' level='[State]' user:ui-action-filter='[Action2_B7B92526785E4931A603411C3F55DE37]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[State]' member='&quot;California&quot;' user:ui-action-filter='[Action2_B7B92526785E4931A603411C3F55DE37]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.1tdv5180uli2ye1atqdsy1d357mk].[Action (State)]</column>
@@ -1157,6 +1142,7 @@
           <style-rule element='axis'>
             <encoding attr='space' class='0' field='[federated.1tdv5180uli2ye1atqdsy1d357mk].[none:Customer Lifetime Value:qk]' field-type='quantitative' max='68541.546931974925' min='213.63231339705362' range-type='fixed' scope='cols' type='space' />
             <encoding attr='space' class='0' field='[federated.1tdv5180uli2ye1atqdsy1d357mk].[none:Income:qk]' field-type='quantitative' max='78565' min='-5641' range-type='fixed' scope='rows' type='space' />
+            <format attr='title' class='0' field='[federated.1tdv5180uli2ye1atqdsy1d357mk].[none:Customer Lifetime Value:qk]' scope='cols' value='Lifetime Value' />
           </style-rule>
           <style-rule element='worksheet'>
             <format attr='display-field-labels' scope='cols' value='false' />
@@ -1296,7 +1282,7 @@
             </groupfilter>
           </filter>
           <filter class='categorical' column='[federated.1tdv5180uli2ye1atqdsy1d357mk].[Action (State)]'>
-            <groupfilter function='level-members' level='[State]' user:ui-action-filter='[Action2_B7B92526785E4931A603411C3F55DE37]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[State]' member='&quot;California&quot;' user:ui-action-filter='[Action2_B7B92526785E4931A603411C3F55DE37]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <shelf-sorts>
             <shelf-sort-v2 dimension-to-sort='[federated.1tdv5180uli2ye1atqdsy1d357mk].[none:EmploymentStatus:nk]' direction='DESC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.1tdv5180uli2ye1atqdsy1d357mk].[cnt:EmploymentStatus:qk]' shelf='rows' />
@@ -1468,7 +1454,7 @@
             <groupfilter function='level-members' level='[Gender]' user:ui-action-filter='[Action1_D634F60965A84EF2B05DC08536C01D2D]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.1tdv5180uli2ye1atqdsy1d357mk].[Action (State)]'>
-            <groupfilter function='level-members' level='[State]' user:ui-action-filter='[Action2_B7B92526785E4931A603411C3F55DE37]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[State]' member='&quot;California&quot;' user:ui-action-filter='[Action2_B7B92526785E4931A603411C3F55DE37]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.1tdv5180uli2ye1atqdsy1d357mk].[Action (Gender)]</column>
@@ -1773,7 +1759,7 @@
             </groupfilter>
           </filter>
           <filter class='categorical' column='[federated.1tdv5180uli2ye1atqdsy1d357mk].[Action (State)]'>
-            <groupfilter function='level-members' level='[State]' user:ui-action-filter='[Action2_B7B92526785E4931A603411C3F55DE37]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[State]' member='&quot;California&quot;' user:ui-action-filter='[Action2_B7B92526785E4931A603411C3F55DE37]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.1tdv5180uli2ye1atqdsy1d357mk].[Action (Gender)]</column>
@@ -1826,7 +1812,7 @@
       <layout-options>
         <title>
           <formatted-text>
-            <run bold='true' fontcolor='#000000' fontname='Calibri'>MARKETING CUSTOMER</run>
+            <run bold='true' fontcolor='#000000' fontname='Calibri'>MARKETING CUSTOMER DEMOGRAPHICS</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -1844,54 +1830,10 @@
               </zone-style>
             </zone>
             <zone h='92968' id='40' param='horz' type-v2='layout-flow' w='98828' x='586' y='5990'>
-              <zone h='92968' id='36' param='horz' type-v2='layout-flow' w='98828' x='586' y='5990'>
-                <zone h='92968' id='27' param='horz' type-v2='layout-flow' w='98828' x='586' y='5990'>
-                  <zone h='92968' id='25' type-v2='layout-basic' w='98828' x='586' y='5990'>
-                    <zone h='70961' id='10' param='horz' type-v2='layout-flow' w='98828' x='586' y='5990'>
-                      <zone h='70961' id='8' type-v2='layout-basic' w='98828' x='586' y='5990'>
-                        <zone h='22135' id='19' name='Total_Clients' w='23279' x='586' y='5990'>
-                          <zone-style>
-                            <format attr='border-color' value='#000000' />
-                            <format attr='border-style' value='none' />
-                            <format attr='border-width' value='0' />
-                            <format attr='margin' value='4' />
-                          </zone-style>
-                        </zone>
-                        <zone h='48826' id='7' name='Customer Per Gender' w='23279' x='586' y='28125'>
-                          <zone-style>
-                            <format attr='border-color' value='#000000' />
-                            <format attr='border-style' value='none' />
-                            <format attr='border-width' value='0' />
-                            <format attr='margin' value='4' />
-                          </zone-style>
-                        </zone>
-                        <zone h='47133' id='34' name='States' w='34960' x='64454' y='29818'>
-                          <zone-style>
-                            <format attr='border-color' value='#000000' />
-                            <format attr='border-style' value='none' />
-                            <format attr='border-width' value='0' />
-                            <format attr='margin' value='4' />
-                          </zone-style>
-                        </zone>
-                        <zone h='70961' id='38' name='Customer_Lifetime Income' w='40589' x='23865' y='5990'>
-                          <zone-style>
-                            <format attr='border-color' value='#000000' />
-                            <format attr='border-style' value='none' />
-                            <format attr='border-width' value='0' />
-                            <format attr='margin' value='4' />
-                          </zone-style>
-                        </zone>
-                        <zone h='23828' id='48' name='Boxplot_Vehicle_Claims' w='34960' x='64454' y='5990'>
-                          <zone-style>
-                            <format attr='border-color' value='#000000' />
-                            <format attr='border-style' value='none' />
-                            <format attr='border-width' value='0' />
-                            <format attr='margin' value='4' />
-                          </zone-style>
-                        </zone>
-                      </zone>
-                    </zone>
-                    <zone h='22007' id='18' name='Employment Status per Gender' w='69916' x='29498' y='76951'>
+              <zone h='92968' id='25' type-v2='layout-basic' w='98828' x='586' y='5990'>
+                <zone h='70961' id='10' param='horz' type-v2='layout-flow' w='98828' x='586' y='5990'>
+                  <zone h='70961' id='8' type-v2='layout-basic' w='98828' x='586' y='5990'>
+                    <zone h='22135' id='19' name='Total_Clients' w='23279' x='586' y='5990'>
                       <zone-style>
                         <format attr='border-color' value='#000000' />
                         <format attr='border-style' value='none' />
@@ -1899,7 +1841,31 @@
                         <format attr='margin' value='4' />
                       </zone-style>
                     </zone>
-                    <zone h='22007' id='14' name='MaritalVSGender' w='28912' x='586' y='76951'>
+                    <zone h='48826' id='7' name='Customer Per Gender' w='23279' x='586' y='28125'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='42446' id='34' name='States' w='34960' x='64454' y='34505'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='70961' id='38' name='Customer_Lifetime Income' w='40589' x='23865' y='5990'>
+                      <zone-style>
+                        <format attr='border-color' value='#000000' />
+                        <format attr='border-style' value='none' />
+                        <format attr='border-width' value='0' />
+                        <format attr='margin' value='4' />
+                      </zone-style>
+                    </zone>
+                    <zone h='28515' id='46' name='Boxplot_Vehicle_Claims' w='34960' x='64454' y='5990'>
                       <zone-style>
                         <format attr='border-color' value='#000000' />
                         <format attr='border-style' value='none' />
@@ -1908,6 +1874,22 @@
                       </zone-style>
                     </zone>
                   </zone>
+                </zone>
+                <zone h='22007' id='18' name='Employment Status per Gender' w='69916' x='29498' y='76951'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone h='22007' id='14' name='MaritalVSGender' w='28912' x='586' y='76951'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
                 </zone>
               </zone>
             </zone>
@@ -1919,7 +1901,7 @@
             <format attr='margin' value='8' />
           </zone-style>
         </zone>
-        <zone h='7422' id='37' name='States' pane-specification-id='0' param='[federated.1tdv5180uli2ye1atqdsy1d357mk].[usr:Calculation_2383248680947044353:qk]' type-v2='color' w='10249' x='65154' y='64844' />
+        <zone h='6250' id='37' name='States' pane-specification-id='0' param='[federated.1tdv5180uli2ye1atqdsy1d357mk].[usr:Calculation_2383248680947044353:qk]' type-v2='color' w='10249' x='65154' y='66016' />
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
@@ -1930,10 +1912,10 @@
               </formatted-text>
             </title>
           </layout-options>
-          <size maxheight='1700' minheight='1700' sizing-mode='vscroll' />
+          <size maxheight='1750' minheight='1750' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='52' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='97916' id='51' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
+            <zone h='100000' id='50' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='97916' id='49' param='vert' type-v2='layout-flow' w='98828' x='586' y='1042'>
                 <zone h='4948' id='43' type-v2='title' w='98828' x='586' y='1042'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -1961,7 +1943,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='175' h='23828' id='48' is-fixed='true' name='Boxplot_Vehicle_Claims' w='34960' x='64454' y='5990'>
+                <zone fixed-size='211' h='28515' id='46' is-fixed='true' name='Boxplot_Vehicle_Claims' w='34960' x='64454' y='5990'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -1979,7 +1961,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='47133' id='34' is-fixed='true' name='States' w='34960' x='64454' y='29818'>
+                <zone fixed-size='280' h='42446' id='34' is-fixed='true' name='States' w='34960' x='64454' y='34505'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -1988,7 +1970,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='7422' id='37' name='States' pane-specification-id='0' param='[federated.1tdv5180uli2ye1atqdsy1d357mk].[usr:Calculation_2383248680947044353:qk]' type-v2='color' w='10249' x='65154' y='64844'>
+                <zone h='6250' id='37' name='States' pane-specification-id='0' param='[federated.1tdv5180uli2ye1atqdsy1d357mk].[usr:Calculation_2383248680947044353:qk]' type-v2='color' w='10249' x='65154' y='66016'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -2027,28 +2009,6 @@
         </devicelayout>
       </devicelayouts>
       <simple-id uuid='{03372FBA-8B0B-45DD-88A5-80BD4041F251}' />
-    </dashboard>
-    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Painel 2'>
-      <style />
-      <size maxheight='860' maxwidth='650' minheight='560' minwidth='420' />
-      <zones />
-      <devicelayouts>
-        <devicelayout auto-generated='true' name='Phone'>
-          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
-          <zones>
-            <zone h='100000' id='12' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98134' id='11' param='vert' type-v2='layout-flow' w='97538' x='1231' y='933' />
-              <zone-style>
-                <format attr='border-color' value='#000000' />
-                <format attr='border-style' value='none' />
-                <format attr='border-width' value='0' />
-                <format attr='margin' value='8' />
-              </zone-style>
-            </zone>
-          </zones>
-        </devicelayout>
-      </devicelayouts>
-      <simple-id uuid='{CD53A2C8-0449-4E18-87A3-7FAC3800F09B}' />
     </dashboard>
   </dashboards>
   <windows source-height='30'>
@@ -2193,7 +2153,7 @@
       </cards>
       <simple-id uuid='{174301AA-E6CE-400E-AED9-1F15A29472CB}' />
     </window>
-    <window class='dashboard' maximized='true' name='DsB_Customer_Demo_Incom_And_Service'>
+    <window class='dashboard' name='DsB_Customer_Demo_Incom_And_Service'>
       <viewpoints>
         <viewpoint name='Boxplot_Vehicle_Claims'>
           <zoom type='fit-height' />
@@ -2219,7 +2179,7 @@
           <zoom type='fit-width' />
         </viewpoint>
       </viewpoints>
-      <active id='43' />
+      <active id='-1' />
       <device-preview visible='true' />
       <simple-id uuid='{3A0884D9-6CDB-482F-A822-A0481E5C5DB4}' />
     </window>
@@ -2252,7 +2212,7 @@
       </cards>
       <simple-id uuid='{994C36DE-0CF0-45ED-8226-DFA86456F344}' />
     </window>
-    <window class='worksheet' name='Total_Clients'>
+    <window class='worksheet' maximized='true' name='Total_Clients'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -2359,11 +2319,6 @@
         </edge>
       </cards>
       <simple-id uuid='{26B7C4F5-47F9-4C8E-90B0-9DEC58B99971}' />
-    </window>
-    <window class='dashboard' name='Painel 2'>
-      <viewpoints />
-      <active id='-1' />
-      <simple-id uuid='{A256120E-4872-4B76-84F0-A3893FD823C9}' />
     </window>
   </windows>
 </workbook>
